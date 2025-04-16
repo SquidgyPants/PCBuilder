@@ -47,7 +47,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
     "Spring Boot.BackEndApplication.executor": "Debug",
-    "git-widget-placeholder": "main",
+    "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Kars Vestjens/IdeaProjects/PCBuilder/backend/back-end",
     "node.js.detected.package.eslint": "true",
@@ -104,7 +104,7 @@
       <option name="presentableId" value="Default" />
       <updated>1744703628315</updated>
       <workItem from="1744703628987" duration="10913000" />
-      <workItem from="1744793472640" duration="41000" />
+      <workItem from="1744793472640" duration="648000" />
     </task>
     <servers />
   </component>
