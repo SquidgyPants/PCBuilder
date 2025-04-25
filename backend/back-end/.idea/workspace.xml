@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd983783-b705-455e-bbf0-b3247ba593d5" name="Changes" comment="Dockerfile addition">
+    <list default="true" id="fd983783-b705-455e-bbf0-b3247ba593d5" name="Changes" comment="Dockerfile small changes">
       <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -99,7 +99,7 @@
       <updated>1744797177592</updated>
       <workItem from="1744797178761" duration="389000" />
       <workItem from="1744797704942" duration="3247000" />
-      <workItem from="1745493360942" duration="3581000" />
+      <workItem from="1745493360942" duration="3690000" />
     </task>
     <task id="LOCAL-00001" summary="Dockerfile addition">
       <option name="closed" value="true" />
@@ -109,7 +109,15 @@
       <option name="project" value="LOCAL" />
       <updated>1745497188269</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Dockerfile small changes">
+      <option name="closed" value="true" />
+      <created>1745565660640</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1745565660640</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -117,6 +125,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Dockerfile addition" />
-    <option name="LAST_COMMIT_MESSAGE" value="Dockerfile addition" />
+    <MESSAGE value="Dockerfile small changes" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dockerfile small changes" />
   </component>
 </project>
