@@ -16,7 +16,7 @@ RUN ./mvnw package -DskipTests
 EXPOSE 8080
 
 # Start the Spring Boot application
-ENTRYPOINT ["java", "-jar", "target/BackEndApplication.jar"]
+ENTRYPOINT ["java", "-jar", "out/*.jar"]
 
 
 #FROM amazoncorretto:23
