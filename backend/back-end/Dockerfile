@@ -1,17 +1,22 @@
 # Gebruik Amazon Corretto 23 als runtime image
+# Use Amazon Corretto 23 as the runtime image
 FROM amazoncorretto:23 AS runtime
 
-# Stel de werkdirectory in de container in
+# Set the working directory in the container
 WORKDIR /app
 
-# Kopieer je Spring Boot JAR (die je lokaal bouwt met Maven of Gradle)
-COPY target/*.jar BackEndApplication.jar
+# Copy Maven configuration and source files
+COPY pom.xml ./
+COPY src ./src
 
-# Expose de poort waarop je app draait (bijv. 8080)
+# Build the project using Maven
+RUN ./mvnw package -DskipTests
+
+# Expose the port on which the app runs (e.g., 8080)
 EXPOSE 8080
 
-# Start de Spring Boot applicatie
-ENTRYPOINT ["java", "-jar", "app.jar"]
+# Start the Spring Boot application
+ENTRYPOINT ["java", "-jar", "target/BackEndApplication.jar"]
 
 
 #FROM amazoncorretto:23

@@ -74,8 +74,8 @@
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
     "nodejs_package_manager_path": "npm",
-    "project.structure.last.edited": "Project",
-    "project.structure.proportion": "0.0",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.0",
     "vue.rearranger.settings.migration": "true"
   },
@@ -112,7 +112,7 @@
       <updated>1744797177592</updated>
       <workItem from="1744797178761" duration="389000" />
       <workItem from="1744797704942" duration="3247000" />
-      <workItem from="1745493360942" duration="4529000" />
+      <workItem from="1745493360942" duration="4972000" />
     </task>
     <task id="LOCAL-00001" summary="Dockerfile addition">
       <option name="closed" value="true" />
