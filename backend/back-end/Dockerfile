@@ -1,7 +1,18 @@
-FROM openjdk:8-jdk-alpine
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-ENTRYPOINT ["java","-jar","/app.jar"]
+# Gebruik Amazon Corretto 23 als runtime image
+FROM amazoncorretto:23 as runtime
+
+# Stel de werkdirectory in de container in
+WORKDIR /app
+
+# Kopieer je Spring Boot JAR (die je lokaal bouwt met Maven of Gradle)
+COPY target/*.jar app.jar
+
+# Expose de poort waarop je app draait (bijv. 8080)
+EXPOSE 8080
+
+# Start de Spring Boot applicatie
+ENTRYPOINT ["java", "-jar", "app.jar"]
+
 
 #FROM amazoncorretto:23
 #LABEL authors="Squidgy"
