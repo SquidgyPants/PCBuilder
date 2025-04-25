@@ -5,7 +5,7 @@ FROM amazoncorretto:23 AS runtime
 WORKDIR /app
 
 # Kopieer je Spring Boot JAR (die je lokaal bouwt met Maven of Gradle)
-COPY target/*.jar app.jar
+COPY target/*.jar BackEndApplication.jar
 
 # Expose de poort waarop je app draait (bijv. 8080)
 EXPOSE 8080
