@@ -1,5 +1,5 @@
 # Gebruik Amazon Corretto 23 als runtime image
-FROM amazoncorretto:23 as runtime
+FROM amazoncorretto:23 AS runtime
 
 # Stel de werkdirectory in de container in
 WORKDIR /app
