@@ -4,11 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="fd983783-b705-455e-bbf0-b3247ba593d5" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Repositories/BuildInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Repositories/BuildInterface.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Repositories/PartInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Repositories/PartInterface.java" afterDir="false" />
+    <list default="true" id="fd983783-b705-455e-bbf0-b3247ba593d5" name="Changes" comment="Dockerfile addition">
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -54,6 +51,7 @@
     "RequestMappingsPanelWidth1": "75",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "RunOnceActivity.git.unshallow": "true",
+    "SONARLINT_PRECOMMIT_ANALYSIS": "true",
     "Spring Boot.BackEndApplication.executor": "Run",
     "git-widget-placeholder": "dev",
     "kotlin-language-version-configured": "true",
@@ -101,11 +99,24 @@
       <updated>1744797177592</updated>
       <workItem from="1744797178761" duration="389000" />
       <workItem from="1744797704942" duration="3247000" />
-      <workItem from="1745493360942" duration="2684000" />
+      <workItem from="1745493360942" duration="3581000" />
     </task>
+    <task id="LOCAL-00001" summary="Dockerfile addition">
+      <option name="closed" value="true" />
+      <created>1745497188268</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1745497188269</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Dockerfile addition" />
+    <option name="LAST_COMMIT_MESSAGE" value="Dockerfile addition" />
   </component>
 </project>

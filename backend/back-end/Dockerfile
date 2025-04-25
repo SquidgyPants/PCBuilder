@@ -1,8 +1,8 @@
-FROM ubuntu:latest
+FROM amazoncorretto:23
 LABEL authors="Squidgy"
 
 # Gebruik een JDK base image om de app te bouwen
-FROM openjdk:17-jdk-slim as build
+FROM amazoncorretto:23 AS build
 
 # Stel de working directory in
 WORKDIR /app
