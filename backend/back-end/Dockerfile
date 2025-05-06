@@ -1,22 +1,8 @@
-# Gebruik Amazon Corretto 23 als runtime image
-# Use Amazon Corretto 23 as the runtime image
-FROM amazoncorretto:23 AS runtime
-
-# Set the working directory in the container
+FROM openjdk:17
 WORKDIR /app
-
-# Copy Maven configuration and source files
-COPY pom.xml ./
-COPY src ./src
-
-# Build the project using Maven
-RUN ./mvnw package -DskipTests
-
-# Expose the port on which the app runs (e.g., 8080)
+COPY ${JAR_FILE} app.jar
 EXPOSE 8080
-
-# Start the Spring Boot application
-ENTRYPOINT ["java", "-jar", "out/*.jar"]
+CMD ["java", "-jar", "demo-0.0.1-SNAPSHOT.jar"]
 
 
 #FROM amazoncorretto:23
