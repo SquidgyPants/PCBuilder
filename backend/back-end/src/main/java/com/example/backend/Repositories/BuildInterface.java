@@ -9,5 +9,5 @@ import java.util.UUID;
 
 @Repository
 @Table
-public interface BuildInterface extends CrudRepository<BuildDTO, UUID> {
+public interface BuildInterface extends CrudRepository<BuildDTO, String> {
 }

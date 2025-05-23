@@ -17,12 +17,5 @@ public class Part {
     private Double price;
     private String type;
     private String compatibility;
-
-    @ManyToMany(mappedBy = "parts")
-    private List<Build> builds;
-
-    public void setUUID() {
-        this.id = UUID.randomUUID();
-    }
 }
 

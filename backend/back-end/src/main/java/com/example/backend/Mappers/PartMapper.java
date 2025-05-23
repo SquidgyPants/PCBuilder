@@ -9,6 +9,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Component
@@ -18,7 +19,7 @@ public class PartMapper {
         if (part == null) return null;
 
         PartDTO dto = new PartDTO();
-        dto.setId(part.getId());
+        dto.setId(part.getId().toString());
         dto.setName(part.getName());
         dto.setPrice(part.getPrice());
         dto.setType(part.getType());
@@ -30,7 +31,7 @@ public class PartMapper {
         if (dto == null) return null;
 
         Part part = new Part();
-        part.setId(dto.getId());
+        part.setId(UUID.fromString(dto.getId()));
         part.setName(dto.getName());
         part.setPrice(dto.getPrice());
         part.setType(dto.getType());

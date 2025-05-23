@@ -24,7 +24,7 @@ public class BuildContainer {
     }
 
     public Build getBuild(UUID id) {
-        Build build = repo.findById(id)
+        Build build = repo.findById(id.toString())
                 .map(BuildMapper::toEntity)
                 .orElse(new Build());
         return build;
@@ -35,7 +35,7 @@ public class BuildContainer {
     }
 
     public void deleteBuild(UUID id) {
-        repo.deleteById(id);
+        repo.deleteById(id.toString());
     }
 }
 

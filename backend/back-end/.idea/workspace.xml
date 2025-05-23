@@ -10,11 +10,24 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd983783-b705-455e-bbf0-b3247ba593d5" name="Changes" comment="Dockerfile bug fixes">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/DTOs/BuildPart.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Containers/BuildContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Containers/BuildContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Containers/PartContainer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Containers/PartContainer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/DTOs/BuildDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/DTOs/BuildDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/DTOs/PartDTO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/DTOs/PartDTO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Mappers/BuildMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Mappers/BuildMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Mappers/PartMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Mappers/PartMapper.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Models/Build.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Models/Build.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Models/Part.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Models/Part.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Repositories/BuildInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Repositories/BuildInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Repositories/PartInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Repositories/PartInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/com/example/backend/BackEndApplicationTests.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,9 +39,9 @@
       <list>
         <option value="package-info" />
         <option value="Interface" />
-        <option value="Class" />
         <option value="Dockerfile" />
         <option value="JavaScript File" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -71,9 +84,10 @@
   </component>
   <component name="PropertiesComponent">{
   &quot;keyToString&quot;: {
-    &quot;Maven.back-end [clean].executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.back-end [clean].executor&quot;: &quot;Run&quot;,
     &quot;Maven.back-end [compile].executor&quot;: &quot;Debug&quot;,
-    &quot;Maven.back-end [package].executor&quot;: &quot;Debug&quot;,
+    &quot;Maven.back-end [package] (1).executor&quot;: &quot;Run&quot;,
+    &quot;Maven.back-end [package].executor&quot;: &quot;Run&quot;,
     &quot;RequestMappingsPanelOrder0&quot;: &quot;0&quot;,
     &quot;RequestMappingsPanelOrder1&quot;: &quot;1&quot;,
     &quot;RequestMappingsPanelWidth0&quot;: &quot;75&quot;,
@@ -82,17 +96,18 @@
     &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
     &quot;SONARLINT_PRECOMMIT_ANALYSIS&quot;: &quot;true&quot;,
     &quot;Spring Boot.BackEndApplication.executor&quot;: &quot;Run&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;dev&quot;,
     &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kars Vestjens/IdeaProjects/PCBuilder/backend/back-end/Dockerfile&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/Kars Vestjens/IdeaProjects/SpringBootPocV3&quot;,
     &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
     &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
     &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
     &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
     &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Project&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
     &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
     &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;preferences.pluginManager&quot;,
     &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   },
   &quot;keyToStringList&quot;: {
@@ -169,7 +184,7 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
-    <configuration name="back-end [package]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+    <configuration name="back-end [package] (1)" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
       <MavenSettings>
         <option name="myGeneralSettings" />
         <option name="myRunnerSettings" />
@@ -199,6 +214,37 @@
       </MavenSettings>
       <method v="2" />
     </configuration>
+    <configuration name="back-end [package]" type="MavenRunConfiguration" factoryName="Maven" temporary="true">
+      <MavenSettings>
+        <option name="myGeneralSettings" />
+        <option name="myRunnerSettings" />
+        <option name="myRunnerParameters">
+          <MavenRunnerParameters>
+            <option name="cmdOptions" />
+            <option name="profiles">
+              <set />
+            </option>
+            <option name="goals">
+              <list>
+                <option value="package" />
+                <option value="-DSkipTests" />
+              </list>
+            </option>
+            <option name="multimoduleDir" />
+            <option name="pomFileName" value="pom.xml" />
+            <option name="profilesMap">
+              <map />
+            </option>
+            <option name="projectsCmdOptionValues">
+              <list />
+            </option>
+            <option name="resolveToWorkspace" value="false" />
+            <option name="workingDirPath" value="$PROJECT_DIR$" />
+          </MavenRunnerParameters>
+        </option>
+      </MavenSettings>
+      <method v="2" />
+    </configuration>
     <configuration name="BackEndApplication" type="SpringBootApplicationConfigurationType" factoryName="Spring Boot" nameIsGenerated="true">
       <module name="back-end" />
       <option name="SPRING_BOOT_MAIN_CLASS" value="com.example.backend.BackEndApplication" />
@@ -208,6 +254,7 @@
     </configuration>
     <list>
       <item itemvalue="Application.BUILD JAR" />
+      <item itemvalue="Maven.back-end [package] (1)" />
       <item itemvalue="Maven.back-end [clean]" />
       <item itemvalue="Maven.back-end [compile]" />
       <item itemvalue="Maven.back-end [package]" />
@@ -215,6 +262,7 @@
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Maven.back-end [package] (1)" />
         <item itemvalue="Maven.back-end [compile]" />
         <item itemvalue="Maven.back-end [package]" />
         <item itemvalue="Maven.back-end [clean]" />
@@ -247,6 +295,10 @@
       <workItem from="1746693980218" duration="578000" />
       <workItem from="1746694735278" duration="592000" />
       <workItem from="1746695590560" duration="2905000" />
+      <workItem from="1747388079755" duration="223000" />
+      <workItem from="1747640781982" duration="2409000" />
+      <workItem from="1747729026275" duration="3566000" />
+      <workItem from="1747985345268" duration="150000" />
     </task>
     <task id="LOCAL-00001" summary="Dockerfile addition">
       <option name="closed" value="true" />

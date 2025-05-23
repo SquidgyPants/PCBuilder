@@ -10,6 +10,6 @@ import java.util.UUID;
 
 @Repository
 @Table
-public interface PartInterface extends CrudRepository<PartDTO, UUID> {
+public interface PartInterface extends CrudRepository<PartDTO, String> {
 
 }
