@@ -1,23 +1,26 @@
-# Gebruik Amazon Corretto 23 als runtime image
-# Use Amazon Corretto 23 as the runtime image
-FROM amazoncorretto:23 AS runtime
+FROM maven:3.9.4-eclipse-temurin-21 AS build
 
 # Set the working directory in the container
 WORKDIR /app
 
-RUN mvn install
-RUN mvn wrapper:wrapper
-
 # Copy Maven configuration and source files
 COPY pom.xml ./
 COPY src ./src
-COPY mvnw ./
 
 # Build the project using Maven
-RUN ./mvwn clean package
+RUN mvn clean package -DskipTests
+
+# Use a smaller base image for the runtime
+FROM openjdk:21 AS runtime
+
+# Set the working directory in the container
+WORKDIR /app
+
+# Copy the built JAR file from the build stage
+COPY --from=build /target/*.jar app.jar
 
 # Expose the port on which the app runs (e.g., 8080)
 EXPOSE 8080
 
 # Start the Spring Boot application
-ENTRYPOINT ["java", "-jar", "target/.jar"]
+ENTRYPOINT ["java", "-jar", "target/*.jar"]
