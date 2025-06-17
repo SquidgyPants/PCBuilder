@@ -26,6 +26,12 @@ public class BuildController {
         return ResponseEntity.ok(buildService.getBuild(id));
     }
 
+    @GetMapping()
+    public ResponseEntity<Build> getNewBuild() {
+        Build build = buildService.getNewBuild();
+        return ResponseEntity.ok(build);
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Build> updateBuild(@RequestBody BuildDTO buildDTO) {
         return ResponseEntity.ok(buildService.updateBuild(buildDTO));

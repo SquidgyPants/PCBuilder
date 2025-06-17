@@ -9,20 +9,19 @@ const client = new Client();
 
 <template>
   <div>
-    <b-navbar style="background-color: #66DE80" toggleable="lg">
-      <b-navbar-brand @click="$router.push(`/`)">Anchr</b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
+    <b-navbar style="background-color: #ADD8E6" toggleable="lg">
+      <b-navbar-brand @click="$router.push(`/`)">PCBuilder</b-navbar-brand>
       <b-collapse id="nav-collapse" is-nav="true">
-        <b-navbar-nav>
+        <b-navbar-nav style="margin-right: auto;">
           <b-nav-item :to="`/mybuilds`">Mijn samenstellingen</b-nav-item>
-          <b-nav-item :to="`/build`">Maak nieuw</b-nav-item>
+          <b-nav-item :to="`/builder`">Maak nieuw</b-nav-item>
         </b-navbar-nav>
+
       </b-collapse>
     </b-navbar>
   </div>
 </template>
+
 <style scoped>
 b-navbar {
   width: 100%;

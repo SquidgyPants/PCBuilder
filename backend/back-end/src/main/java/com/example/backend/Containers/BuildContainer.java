@@ -30,6 +30,13 @@ public class BuildContainer {
         return build;
     }
 
+    public Build getNewBuild() {
+        BuildDTO build = new BuildDTO();
+        build.setId(UUID.randomUUID().toString());
+        build = repo.save(build);
+        return BuildMapper.toEntity(build);
+    }
+
     public Build updateBuild(BuildDTO dto) {
         return BuildMapper.toEntity(repo.save(dto));
     }

@@ -13,7 +13,6 @@ import java.util.UUID;
 @Setter
 public class BuildDTO {
     @Id
-    @GeneratedValue
     private String id;
     private String name;
     private Double price;
