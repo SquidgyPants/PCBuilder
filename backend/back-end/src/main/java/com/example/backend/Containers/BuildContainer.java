@@ -1,6 +1,7 @@
 package com.example.backend.Containers;
 
 import com.example.backend.DTOs.BuildDTO;
+import com.example.backend.DTOs.PartDTO;
 import com.example.backend.Mappers.BuildMapper;
 import com.example.backend.Mappers.PartMapper;
 import com.example.backend.Models.Build;
@@ -10,6 +11,8 @@ import com.example.backend.Repositories.BuildPart;
 import com.example.backend.Repositories.PartInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 import java.util.ArrayList;
@@ -50,13 +53,23 @@ public class BuildContainer {
         build.setId(UUID.randomUUID().toString());
         build = repo.save(build);
 
-        Build buildmodel = BuildMapper.toEntity(build);
-        buildmodel.setParts(new ArrayList<>());
-        List<Part> parts = StreamSupport.stream(partRepo.findAll().spliterator(), false)
+        Build buildModel = BuildMapper.toEntity(build);
+        buildModel.setParts(new ArrayList<>());
+        List<PartDTO> partDTOs = StreamSupport.stream(partRepo.findAll().spliterator(), false)
+                .collect(Collectors.groupingBy(
+                        PartDTO::getType,
+                        toList()
+                ))
+                .values()
+                .stream()
+                .flatMap(List::stream)
+                .toList();
+        List<Part> parts = partDTOs.stream()
                 .map(PartMapper::toEntity)
                 .toList();
-        buildmodel.setAllParts(parts);
-        return BuildMapper.toEntity(build);
+
+        buildModel.setAllParts(parts);
+        return buildModel;
 }
 
     public Build addPartsToBuild (List<Part> parts, String buildId) {

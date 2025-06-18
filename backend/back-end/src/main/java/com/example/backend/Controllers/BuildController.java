@@ -36,8 +36,6 @@ public class BuildController {
         return ResponseEntity.ok(build);
     }
 
-    @GetMapping("/addPartsToBuild")
-
     @PutMapping("/updateBuild")
     public ResponseEntity<Build> updateBuild(@RequestBody BuildDTO buildDTO) {
         return ResponseEntity.ok(buildService.updateBuild(buildDTO));

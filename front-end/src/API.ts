@@ -21,6 +21,47 @@ export class Client {
     /**
      * @return OK
      */
+    updateBuild(body: BuildDTO): Promise<Build> {
+        let url_ = this.baseUrl + "/build/updateBuild";
+        url_ = url_.replace(/[?&]$/, "");
+
+        const content_ = JSON.stringify(body);
+
+        let options_: RequestInit = {
+            body: content_,
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "*/*"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processUpdateBuild(_response);
+        });
+    }
+
+    protected processUpdateBuild(response: Response): Promise<Build> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            result200 = Build.fromJS(resultData200);
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Build>(null as any);
+    }
+
+    /**
+     * @return OK
+     */
     getPart(id: string): Promise<Part> {
         let url_ = this.baseUrl + "/api/parts/{id}";
         if (id === undefined || id === null)
@@ -338,47 +379,6 @@ export class Client {
     /**
      * @return OK
      */
-    updateBuild(body: BuildDTO): Promise<Build> {
-        let url_ = this.baseUrl + "/build/addPartsToBuild";
-        url_ = url_.replace(/[?&]$/, "");
-
-        const content_ = JSON.stringify(body);
-
-        let options_: RequestInit = {
-            body: content_,
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json",
-                "Accept": "*/*"
-            }
-        };
-
-        return this.http.fetch(url_, options_).then((_response: Response) => {
-            return this.processUpdateBuild(_response);
-        });
-    }
-
-    protected processUpdateBuild(response: Response): Promise<Build> {
-        const status = response.status;
-        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
-        if (status === 200) {
-            return response.text().then((_responseText) => {
-            let result200: any = null;
-            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
-            result200 = Build.fromJS(resultData200);
-            return result200;
-            });
-        } else if (status !== 200 && status !== 204) {
-            return response.text().then((_responseText) => {
-            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
-            });
-        }
-        return Promise.resolve<Build>(null as any);
-    }
-
-    /**
-     * @return OK
-     */
     deleteBuild(id: string): Promise<void> {
         let url_ = this.baseUrl + "/build/{id}";
         if (id === undefined || id === null)
@@ -411,70 +411,6 @@ export class Client {
         }
         return Promise.resolve<void>(null as any);
     }
-}
-
-export class Part implements IPart {
-    id?: string;
-    name?: string;
-    price?: number;
-    type?: string;
-    compatibility?: string;
-
-    [key: string]: any;
-
-    constructor(data?: IPart) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.price = _data["price"];
-            this.type = _data["type"];
-            this.compatibility = _data["compatibility"];
-        }
-    }
-
-    static fromJS(data: any): Part {
-        data = typeof data === 'object' ? data : {};
-        let result = new Part();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["price"] = this.price;
-        data["type"] = this.type;
-        data["compatibility"] = this.compatibility;
-        return data;
-    }
-}
-
-export interface IPart {
-    id?: string;
-    name?: string;
-    price?: number;
-    type?: string;
-    compatibility?: string;
-
-    [key: string]: any;
 }
 
 export class BuildDTO implements IBuildDTO {
@@ -619,6 +555,85 @@ export interface IBuild {
     allParts?: Part[];
 
     [key: string]: any;
+}
+
+export class Part implements IPart {
+    id?: string;
+    name?: string;
+    price?: number;
+    type?: PartType;
+    compatibility?: string;
+    typeName?: string;
+
+    [key: string]: any;
+
+    constructor(data?: IPart) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.price = _data["price"];
+            this.type = _data["type"];
+            this.compatibility = _data["compatibility"];
+            this.typeName = _data["typeName"];
+        }
+    }
+
+    static fromJS(data: any): Part {
+        data = typeof data === 'object' ? data : {};
+        let result = new Part();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["price"] = this.price;
+        data["type"] = this.type;
+        data["compatibility"] = this.compatibility;
+        data["typeName"] = this.typeName;
+        return data;
+    }
+}
+
+export interface IPart {
+    id?: string;
+    name?: string;
+    price?: number;
+    type?: PartType;
+    compatibility?: string;
+    typeName?: string;
+
+    [key: string]: any;
+}
+
+export enum PartType {
+    CPU = "CPU",
+    GPU = "GPU",
+    RAM = "RAM",
+    MOTHERBOARD = "MOTHERBOARD",
+    STORAGE = "STORAGE",
+    POWER_SUPPLY = "POWER_SUPPLY",
+    CASE = "CASE",
+    COOLER = "COOLER",
 }
 
 export class ApiException extends Error {
