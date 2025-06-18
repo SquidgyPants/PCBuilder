@@ -13,8 +13,12 @@ import java.util.UUID;
 @RequestMapping("/build")
 public class BuildController {
 
-    @Autowired
     private BuildContainer buildService;
+
+    @Autowired
+    public BuildController(BuildContainer buildService) {
+        this.buildService = buildService;
+    }
 
     @PostMapping
     public ResponseEntity<Build> createBuild(@RequestBody BuildDTO buildDTO) {
@@ -32,7 +36,9 @@ public class BuildController {
         return ResponseEntity.ok(build);
     }
 
-    @PutMapping("/{id}")
+    @GetMapping("/addPartsToBuild")
+
+    @PutMapping("/updateBuild")
     public ResponseEntity<Build> updateBuild(@RequestBody BuildDTO buildDTO) {
         return ResponseEntity.ok(buildService.updateBuild(buildDTO));
     }

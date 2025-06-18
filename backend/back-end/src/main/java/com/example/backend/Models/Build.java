@@ -1,6 +1,5 @@
 package com.example.backend.Models;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -16,5 +15,7 @@ public class Build {
     private String creator;
 
     private List<Part> parts;
+
+    private List<Part> allParts;
 }
 

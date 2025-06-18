@@ -1,8 +1,6 @@
 package com.example.backend.Controllers;
 
 import com.example.backend.Containers.PartContainer;
-import com.example.backend.DTOs.BuildDTO;
-import com.example.backend.DTOs.PartDTO;
 import com.example.backend.Models.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,8 +13,12 @@ import java.util.UUID;
 @RequestMapping("/api/parts")
 public class PartController {
 
-    @Autowired
     private PartContainer partService;
+
+    @Autowired
+    public PartController(PartContainer partService) {
+        this.partService = partService;
+    }
 
     @PostMapping
     public ResponseEntity<Part> createPart(@RequestBody Part part) {

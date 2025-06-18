@@ -3,27 +3,36 @@ import {onMounted, ref} from "vue";
 import { Client } from "../API";
 import {useRoute} from "vue-router";
 import router from "../router.ts";
+import SelectPartComponent from "./SelectPartComponent.vue";
 
 const route = useRoute()
 const client = new Client()
-const result = ref([])
+const result = ref()
 const isLoading = ref(false)
 const error = ref()
 
-const fetchAllParts = async () => {
+const fetchNewBuild = async () => {
   isLoading.value = true
   error.value = null
-
   try {
-    result.value = await client.getAllParts()
-    console.log(result.value)
+    result.value = await client.getNewBuild()
   }
   catch (err) {
     error.value = err
     console.log(error)
   }
   finally {
-    // console.log(result.value)
+    isLoading.value = false
+  }
+}
+
+const addPartsdToBuild = async () => {
+  try {
+    await client.addPartsToBuild()
+  } catch (err) {
+    error.value = err
+    console.error('Error adding part:', err)
+  } finally {
     isLoading.value = false
   }
 }
@@ -40,38 +49,13 @@ const saveBuildAsync = async () => {
   }
 }
 
-onMounted(() => {fetchAllParts()})
+onMounted(() => {fetchNewBuild()})
 </script>
 
 <template>
   <div v-if="isLoading">Loading parts...</div>
   <div v-else-if="error">Error: {{ error.message }}</div>
-  <ul class="list-group">
-    <li v-for="item in result" :key="item?.id" class="list-group-item">
-      <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
-        <label class="form-check-label" for="flexCheckDefault">
-          {{ item?.id }}
-        </label>
-      </div>
-    </li>
-<!--    <li class="list-group-item">-->
-<!--      <div class="form-check">-->
-<!--        <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>-->
-<!--        <label class="form-check-label" for="flexCheckChecked">-->
-<!--          Option 2 (checked)-->
-<!--        </label>-->
-<!--      </div>-->
-<!--    </li>-->
-<!--    <li class="list-group-item">-->
-<!--      <div class="form-check">-->
-<!--        <input class="form-check-input" type="checkbox" value="" id="flexCheckDisabled" disabled>-->
-<!--        <label class="form-check-label" for="flexCheckDisabled">-->
-<!--          Option 3 (disabled)-->
-<!--        </label>-->
-<!--      </div>-->
-<!--    </li>-->
-  </ul>
+  <SelectPartComponent/>
 </template>
 
 <style scoped>

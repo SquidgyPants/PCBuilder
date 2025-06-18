@@ -1,6 +1,5 @@
 package com.example.backend.Containers;
 
-import com.example.backend.DTOs.PartDTO;
 import com.example.backend.Mappers.PartMapper;
 import com.example.backend.Models.Part;
 import com.example.backend.Repositories.PartInterface;

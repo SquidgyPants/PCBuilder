@@ -1,16 +1,12 @@
 package com.example.backend.Mappers;
 
-import com.example.backend.DTOs.BuildDTO;
 import com.example.backend.DTOs.PartDTO;
-import com.example.backend.Models.Build;
 import com.example.backend.Models.Part;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
 
 @Component
 public class PartMapper {

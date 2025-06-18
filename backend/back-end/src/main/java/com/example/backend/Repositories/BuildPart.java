@@ -1,7 +1,6 @@
 package com.example.backend.Repositories;
 
 import com.example.backend.DTOs.PartDTO;
-import jakarta.persistence.Table;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
