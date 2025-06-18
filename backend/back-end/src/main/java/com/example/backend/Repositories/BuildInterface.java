@@ -8,6 +8,5 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-@Table
 public interface BuildInterface extends CrudRepository<BuildDTO, String> {
 }

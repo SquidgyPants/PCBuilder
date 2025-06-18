@@ -6,66 +6,52 @@ import router from "../router.ts";
 
 const route = useRoute()
 const client = new Client()
-const result = ref()
+const result = ref([])
 const isLoading = ref(false)
 const error = ref()
-
-const fetchNewBuild = async () => {
-  isLoading.value = true
-  error.value = null
-
-  try {
-   result.value = await client.getNewBuild()
-  }
-  catch (err) {
-    error.value = err
-    console.log(error)
-  }
-  finally {
-    console.log(result.value)
-    isLoading.value = false
-  }
-}
 
 const fetchAllParts = async () => {
   isLoading.value = true
   error.value = null
 
   try {
-    result.value = await client.getNewBuild()
+    result.value = await client.getAllParts()
+    console.log(result.value)
   }
   catch (err) {
     error.value = err
     console.log(error)
   }
   finally {
-    console.log(result.value)
+    // console.log(result.value)
     isLoading.value = false
   }
 }
 
 const saveBuildAsync = async () => {
   try {
-    await client.updateBuild(result.value)
+    // await client.updateBuild(result.value)
   } catch (err) {
     error.value = err
     console.error('Error saving answers:', err)
   } finally {
     isLoading.value = false
-    router.push(`/SelectedTeam/${route.params.teamId}/${route.params.senderId}`)
+    router.push(`/mybuilds`)
   }
 }
 
-onMounted(() => {fetchNewBuild(); fetchAllParts()})
+onMounted(() => {fetchAllParts()})
 </script>
 
 <template>
+  <div v-if="isLoading">Loading parts...</div>
+  <div v-else-if="error">Error: {{ error.message }}</div>
   <ul class="list-group">
-    <li class="list-group-item">
+    <li v-for="item in result" :key="item?.id" class="list-group-item">
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault">
         <label class="form-check-label" for="flexCheckDefault">
-
+          {{ item?.id }}
         </label>
       </div>
     </li>

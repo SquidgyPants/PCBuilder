@@ -7,7 +7,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
-@ComponentScan({"com.example.backend.Containers", "com.example.backend.Controllers", "com.example.backend.Repositories"})
+@ComponentScan({"com.example.backend.Containers", "com.example.backend.Controllers", "com.example.backend.Repositories", "com.example.backend.Config"})
 @EnableJpaRepositories("com.example.backend.Repositories")
 @EntityScan("com.example.backend.DTOs")
 public class BackEndApplication {

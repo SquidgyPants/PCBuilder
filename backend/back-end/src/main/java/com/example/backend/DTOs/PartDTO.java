@@ -17,5 +17,13 @@ public class PartDTO {
     private Double price;
     private String type;
     private String compatibility;
+
+    public PartDTO() {
+
+    }
+
+    public PartDTO(String id, String name, Double price, String type, String compatibility) {
+
+    }
 }
 

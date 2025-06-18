@@ -39,16 +39,16 @@ public class PartMapper {
         return part;
     }
 
-    public static Iterable<PartDTO> toDTOList(Iterable<Part> parts) {
-        Collection<PartDTO> result = new ArrayList<>();
+    public static List<PartDTO> toDTOList(Iterable<Part> parts) {
+        List<PartDTO> result = new ArrayList<>();
         for (Part part : parts) {
             result.add(toDTO(part));
         }
         return result;
     }
 
-    public static Iterable<Part> toEntityList(Iterable<PartDTO> dtos) {
-        Collection<Part> result = new ArrayList<>();
+    public static List<Part> toEntityList(Iterable<PartDTO> dtos) {
+        List<Part> result = new ArrayList<>();
         for (PartDTO dto : dtos) {
             result.add(toEntity(dto));
         }
