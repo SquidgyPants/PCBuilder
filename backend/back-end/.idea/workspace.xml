@@ -10,16 +10,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd983783-b705-455e-bbf0-b3247ba593d5" name="Changes" comment="Dockerfile bug fixes">
-      <change afterPath="$PROJECT_DIR$/src/META-INF/MANIFEST.MF" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Dockerfile" beforeDir="false" afterPath="$PROJECT_DIR$/Dockerfile" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/node_modules/.package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/node_modules/.package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/artifacts/back_end_jar/back-end.jar" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Enums/Type.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Enums/Type.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/backend/Mappers/PartMapper.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/backend/Mappers/PartMapper.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../../front-end/src/components/BuildComponent.vue" beforeDir="false" afterPath="$PROJECT_DIR$/../../front-end/src/components/BuildComponent.vue" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -167,7 +159,7 @@
       <workItem from="1750066749574" duration="3171000" />
       <workItem from="1750319048050" duration="472000" />
       <workItem from="1750320673839" duration="8053000" />
-      <workItem from="1750345821855" duration="1263000" />
+      <workItem from="1750345821855" duration="2999000" />
     </task>
     <task id="LOCAL-00001" summary="Dockerfile addition">
       <option name="closed" value="true" />
