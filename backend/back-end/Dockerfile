@@ -1,26 +1,15 @@
-FROM maven:3.9.4-eclipse-temurin-21 AS build
+## Dockerfile
+#FROM node:18
+#WORKDIR /app
+#COPY package*.json ./
+#RUN npm install
+#COPY . .
+#CMD ["npm", "start"]
 
-# Set the working directory in the container
+FROM amazoncorretto:23
+
 WORKDIR /app
 
-# Copy Maven configuration and source files
-COPY pom.xml ./
-COPY src ./src
+COPY target/back-end-0.0.1-SNAPSHOT.jar app.jar
 
-# Build the project using Maven
-RUN mvn clean package -DskipTests
-
-# Use a smaller base image for the runtime
-FROM openjdk:21 AS runtime
-
-# Set the working directory in the container
-WORKDIR /app
-
-# Copy the built JAR file from the build stage
-COPY --from=build /target/*.jar app.jar
-
-# Expose the port on which the app runs (e.g., 8080)
-EXPOSE 8080
-
-# Start the Spring Boot application
-ENTRYPOINT ["java", "-jar", "target/*.jar"]
+CMD ["java", "-jar", "app.jar"]

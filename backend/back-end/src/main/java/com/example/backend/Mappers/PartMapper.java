@@ -1,6 +1,7 @@
 package com.example.backend.Mappers;
 
 import com.example.backend.DTOs.PartDTO;
+import com.example.backend.Enums.Type;
 import com.example.backend.Models.Part;
 import org.springframework.stereotype.Component;
 
@@ -31,6 +32,7 @@ public class PartMapper {
         part.setName(dto.getName());
         part.setPrice(dto.getPrice());
         part.setType(dto.getType());
+        part.setTypeName(dto.getType().toString());
         part.setCompatibility(dto.getCompatibility());
         return part;
     }

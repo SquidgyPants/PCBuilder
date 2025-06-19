@@ -16,6 +16,15 @@ public enum Type {
     private final int code;
     private final String label;
 
+    public String fromCode(int code) {
+        for (Type type : Type.values()) {
+            if (type.code == code) {
+                return type.label;
+            }
+        }
+        throw new IllegalArgumentException("Invalid code: " + code);
+    }
+
     Type(int code, String label) {
         this.code = code;
         this.label = label;
