@@ -1,24 +1,28 @@
 package com.example.backend.DTOs;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.UUID;
+import com.example.backend.Enums.Type;
 
 @Entity
+@Table(name = "partdto")
 @Getter
 @Setter
 public class PartDTO {
     @Id
-    @GeneratedValue
-    private UUID id;
+    private String id;
     private String name;
     private Double price;
-    private String type;
+    private Type type;
     private String compatibility;
+
+    public PartDTO() {
+
+    }
+
+    public PartDTO(String id, String name, Double price, Type type, String compatibility) {
+        // Constructor needed for JPA
+    }
 }
 

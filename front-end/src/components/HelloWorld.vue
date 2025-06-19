@@ -1,19 +1,17 @@
-<script setup>
+<script setup lang="ts">
 import { ref } from 'vue'
 
-defineProps({
-  msg: String,
-})
+defineProps<{ msg: string }>()
 
 const count = ref(0)
 </script>
 
 <template>
-  <h1>{{ msg }}</h1>
+  <h1 style="text-align: center;">{{ msg }}</h1>
 
   <div class="card">
     <button type="button" @click="count++">count is {{ count }}</button>
-    <p>
+    <p style="text-align: center">
       Edit
       <code>components/HelloWorld.vue</code> to test HMR
     </p>
@@ -33,7 +31,7 @@ const count = ref(0)
       >Vue Docs Scaling up Guide</a
     >.
   </p>
-  <p class="read-the-docs">Click on the Vite and Vue logos to learn more</p>
+  <p class="read-the-docs" style="text-align: center">Click on the Vite and Vue logos to learn more</p>
 </template>
 
 <style scoped>

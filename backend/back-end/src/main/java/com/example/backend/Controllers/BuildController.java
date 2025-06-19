@@ -10,23 +10,33 @@ import org.springframework.web.bind.annotation.*;
 import java.util.UUID;
 
 @RestController
-@RequestMapping("/api/builds")
+@RequestMapping("/build")
 public class BuildController {
 
-    @Autowired
     private BuildContainer buildService;
+
+    @Autowired
+    public BuildController(BuildContainer buildService) {
+        this.buildService = buildService;
+    }
 
     @PostMapping
     public ResponseEntity<Build> createBuild(@RequestBody BuildDTO buildDTO) {
         return ResponseEntity.ok(buildService.createBuild(buildDTO));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getBuild")
     public ResponseEntity<Build> getBuild(@PathVariable UUID id) {
         return ResponseEntity.ok(buildService.getBuild(id));
     }
 
-    @PutMapping("/{id}")
+    @GetMapping("/getNewBuild")
+    public ResponseEntity<Build> getNewBuild() {
+        Build build = buildService.getNewBuild();
+        return ResponseEntity.ok(build);
+    }
+
+    @PutMapping("/updateBuild")
     public ResponseEntity<Build> updateBuild(@RequestBody BuildDTO buildDTO) {
         return ResponseEntity.ok(buildService.updateBuild(buildDTO));
     }

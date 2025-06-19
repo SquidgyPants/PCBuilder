@@ -1,9 +1,9 @@
 package com.example.backend.Models;
 
-import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
 import java.util.UUID;
 
 @Getter
@@ -14,10 +14,8 @@ public class Build {
     private Double price;
     private String creator;
 
-    @ManyToMany(mappedBy="builds")
-    @JoinTable(name = "build_parts",
-            joinColumns = @JoinColumn(name = "build_id"),
-            inverseJoinColumns = @JoinColumn(name = "part_id"))
-    private Iterable<Part> parts;
+    private List<Part> parts;
+
+    private List<Part> allParts;
 }
 

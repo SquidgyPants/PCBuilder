@@ -1,0 +1,14 @@
+{
+  "name": "back-end",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "java -jar out/back-end.jar",
+    "generate-api": "nswag openapi2tsclient /input:http://localhost:8080/v3/api-docs /output:../../front-end/src/API.ts"
+  },
+  "dependencies": {
+    "maven": "^5.0.0"
+  }
+}

@@ -1,15 +1,13 @@
 package com.example.backend.Mappers;
 
-import com.example.backend.DTOs.BuildDTO;
 import com.example.backend.DTOs.PartDTO;
-import com.example.backend.Models.Build;
+import com.example.backend.Enums.Type;
 import com.example.backend.Models.Part;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.UUID;
 
 @Component
 public class PartMapper {
@@ -18,7 +16,7 @@ public class PartMapper {
         if (part == null) return null;
 
         PartDTO dto = new PartDTO();
-        dto.setId(part.getId());
+        dto.setId(part.getId().toString());
         dto.setName(part.getName());
         dto.setPrice(part.getPrice());
         dto.setType(part.getType());
@@ -30,24 +28,25 @@ public class PartMapper {
         if (dto == null) return null;
 
         Part part = new Part();
-        part.setId(dto.getId());
+        part.setId(UUID.fromString(dto.getId()));
         part.setName(dto.getName());
         part.setPrice(dto.getPrice());
         part.setType(dto.getType());
+        part.setTypeName(dto.getType().toString());
         part.setCompatibility(dto.getCompatibility());
         return part;
     }
 
-    public static Iterable<PartDTO> toDTOList(Iterable<Part> parts) {
-        Collection<PartDTO> result = new ArrayList<>();
+    public static List<PartDTO> toDTOList(Iterable<Part> parts) {
+        List<PartDTO> result = new ArrayList<>();
         for (Part part : parts) {
             result.add(toDTO(part));
         }
         return result;
     }
 
-    public static Iterable<Part> toEntityList(Iterable<PartDTO> dtos) {
-        Collection<Part> result = new ArrayList<>();
+    public static List<Part> toEntityList(Iterable<PartDTO> dtos) {
+        List<Part> result = new ArrayList<>();
         for (PartDTO dto : dtos) {
             result.add(toEntity(dto));
         }

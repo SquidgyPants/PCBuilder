@@ -1,6 +1,5 @@
 package com.example.backend.Containers;
 
-import com.example.backend.DTOs.PartDTO;
 import com.example.backend.Mappers.PartMapper;
 import com.example.backend.Models.Part;
 import com.example.backend.Repositories.PartInterface;
@@ -23,11 +22,11 @@ public class PartContainer {
     }
 
     public Part getPartById(UUID id) {
-        return PartMapper.toEntity(repo.findById(id).orElse(null));
+        return PartMapper.toEntity(repo.findById(id.toString()).orElse(null));
     }
 
     public Part createPart(Part part) {
-        part.setUUID();
+        part.setId(UUID.randomUUID());
         return PartMapper.toEntity(repo.save(PartMapper.toDTO(part)));
     }
 
@@ -37,7 +36,7 @@ public class PartContainer {
 
     public void deletePart(UUID id) {
         try {
-            repo.deleteById(id);
+            repo.deleteById(id.toString());
         } catch (Exception e) {
             // Handle exception if needed
         }

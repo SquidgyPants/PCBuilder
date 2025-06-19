@@ -8,6 +8,7 @@ import org.springframework.stereotype.Component;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.UUID;
 
 @Component
 public class BuildMapper {
@@ -16,7 +17,7 @@ public class BuildMapper {
         if (build == null) return null;
 
         BuildDTO dto = new BuildDTO();
-        dto.setId(build.getId());
+        dto.setId(build.getId().toString());
         dto.setName(build.getName());
         dto.setPrice(build.getPrice());
         dto.setCreator(build.getCreator());
@@ -28,7 +29,7 @@ public class BuildMapper {
         List<Part> parts = new ArrayList<>();
 
         Build build = new Build();
-        build.setId(dto.getId());
+        build.setId(UUID.fromString(dto.getId()));
         build.setName(dto.getName());
         build.setPrice(dto.getPrice());
         build.setCreator(dto.getCreator());
