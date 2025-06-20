@@ -21,8 +21,12 @@ export class Client {
     /**
      * @return OK
      */
-    updateBuild(body: BuildDTO): Promise<Build> {
-        let url_ = this.baseUrl + "/build/updateBuild";
+    updateBuild(partToAdd: Part, body: Build): Promise<Build> {
+        let url_ = this.baseUrl + "/build/updateBuild?";
+        if (partToAdd === undefined || partToAdd === null)
+            throw new Error("The parameter 'partToAdd' must be defined and cannot be null.");
+        else
+            url_ += "partToAdd=" + encodeURIComponent("" + partToAdd) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -413,72 +417,14 @@ export class Client {
     }
 }
 
-export class BuildDTO implements IBuildDTO {
-    id?: string;
-    name?: string;
-    price?: number;
-    creator?: string;
-
-    [key: string]: any;
-
-    constructor(data?: IBuildDTO) {
-        if (data) {
-            for (var property in data) {
-                if (data.hasOwnProperty(property))
-                    (<any>this)[property] = (<any>data)[property];
-            }
-        }
-    }
-
-    init(_data?: any) {
-        if (_data) {
-            for (var property in _data) {
-                if (_data.hasOwnProperty(property))
-                    this[property] = _data[property];
-            }
-            this.id = _data["id"];
-            this.name = _data["name"];
-            this.price = _data["price"];
-            this.creator = _data["creator"];
-        }
-    }
-
-    static fromJS(data: any): BuildDTO {
-        data = typeof data === 'object' ? data : {};
-        let result = new BuildDTO();
-        result.init(data);
-        return result;
-    }
-
-    toJSON(data?: any) {
-        data = typeof data === 'object' ? data : {};
-        for (var property in this) {
-            if (this.hasOwnProperty(property))
-                data[property] = this[property];
-        }
-        data["id"] = this.id;
-        data["name"] = this.name;
-        data["price"] = this.price;
-        data["creator"] = this.creator;
-        return data;
-    }
-}
-
-export interface IBuildDTO {
-    id?: string;
-    name?: string;
-    price?: number;
-    creator?: string;
-
-    [key: string]: any;
-}
-
 export class Build implements IBuild {
     id?: string;
     name?: string;
     price?: number;
     creator?: string;
+    buildParts?: BuildPart[];
     parts?: Part[];
+    partToAdd?: Part;
     allParts?: Part[];
 
     [key: string]: any;
@@ -502,11 +448,17 @@ export class Build implements IBuild {
             this.name = _data["name"];
             this.price = _data["price"];
             this.creator = _data["creator"];
+            if (Array.isArray(_data["buildParts"])) {
+                this.buildParts = [] as any;
+                for (let item of _data["buildParts"])
+                    this.buildParts!.push(BuildPart.fromJS(item));
+            }
             if (Array.isArray(_data["parts"])) {
                 this.parts = [] as any;
                 for (let item of _data["parts"])
                     this.parts!.push(Part.fromJS(item));
             }
+            this.partToAdd = _data["partToAdd"] ? Part.fromJS(_data["partToAdd"]) : <any>undefined;
             if (Array.isArray(_data["allParts"])) {
                 this.allParts = [] as any;
                 for (let item of _data["allParts"])
@@ -532,11 +484,17 @@ export class Build implements IBuild {
         data["name"] = this.name;
         data["price"] = this.price;
         data["creator"] = this.creator;
+        if (Array.isArray(this.buildParts)) {
+            data["buildParts"] = [];
+            for (let item of this.buildParts)
+                data["buildParts"].push(item ? item.toJSON() : <any>undefined);
+        }
         if (Array.isArray(this.parts)) {
             data["parts"] = [];
             for (let item of this.parts)
                 data["parts"].push(item ? item.toJSON() : <any>undefined);
         }
+        data["partToAdd"] = this.partToAdd ? this.partToAdd.toJSON() : <any>undefined;
         if (Array.isArray(this.allParts)) {
             data["allParts"] = [];
             for (let item of this.allParts)
@@ -551,8 +509,66 @@ export interface IBuild {
     name?: string;
     price?: number;
     creator?: string;
+    buildParts?: BuildPart[];
     parts?: Part[];
+    partToAdd?: Part;
     allParts?: Part[];
+
+    [key: string]: any;
+}
+
+export class BuildPart implements IBuildPart {
+    id?: string;
+    buildId?: string;
+    partId?: string;
+
+    [key: string]: any;
+
+    constructor(data?: IBuildPart) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.id = _data["id"];
+            this.buildId = _data["buildId"];
+            this.partId = _data["partId"];
+        }
+    }
+
+    static fromJS(data: any): BuildPart {
+        data = typeof data === 'object' ? data : {};
+        let result = new BuildPart();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["id"] = this.id;
+        data["buildId"] = this.buildId;
+        data["partId"] = this.partId;
+        return data;
+    }
+}
+
+export interface IBuildPart {
+    id?: string;
+    buildId?: string;
+    partId?: string;
 
     [key: string]: any;
 }
@@ -625,15 +641,75 @@ export interface IPart {
     [key: string]: any;
 }
 
+export class BuildDTO implements IBuildDTO {
+    id?: string;
+    name?: string;
+    price?: number;
+    creator?: string;
+
+    [key: string]: any;
+
+    constructor(data?: IBuildDTO) {
+        if (data) {
+            for (var property in data) {
+                if (data.hasOwnProperty(property))
+                    (<any>this)[property] = (<any>data)[property];
+            }
+        }
+    }
+
+    init(_data?: any) {
+        if (_data) {
+            for (var property in _data) {
+                if (_data.hasOwnProperty(property))
+                    this[property] = _data[property];
+            }
+            this.id = _data["id"];
+            this.name = _data["name"];
+            this.price = _data["price"];
+            this.creator = _data["creator"];
+        }
+    }
+
+    static fromJS(data: any): BuildDTO {
+        data = typeof data === 'object' ? data : {};
+        let result = new BuildDTO();
+        result.init(data);
+        return result;
+    }
+
+    toJSON(data?: any) {
+        data = typeof data === 'object' ? data : {};
+        for (var property in this) {
+            if (this.hasOwnProperty(property))
+                data[property] = this[property];
+        }
+        data["id"] = this.id;
+        data["name"] = this.name;
+        data["price"] = this.price;
+        data["creator"] = this.creator;
+        return data;
+    }
+}
+
+export interface IBuildDTO {
+    id?: string;
+    name?: string;
+    price?: number;
+    creator?: string;
+
+    [key: string]: any;
+}
+
 export enum PartType {
     CPU = "CPU",
     GPU = "GPU",
     RAM = "RAM",
-    MOTHERBOARD = "MOTHERBOARD",
-    STORAGE = "STORAGE",
-    POWER_SUPPLY = "POWER_SUPPLY",
-    CASE = "CASE",
-    COOLER = "COOLER",
+    Motherboard = "Motherboard",
+    Storage = "Storage",
+    Power_Supply = "Power Supply",
+    Case = "Case",
+    Cooler = "Cooler",
 }
 
 export class ApiException extends Error {

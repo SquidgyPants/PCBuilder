@@ -3,6 +3,7 @@ package com.example.backend.Controllers;
 import com.example.backend.Containers.BuildContainer;
 import com.example.backend.DTOs.BuildDTO;
 import com.example.backend.Models.Build;
+import com.example.backend.Models.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,8 +38,13 @@ public class BuildController {
     }
 
     @PutMapping("/updateBuild")
-    public ResponseEntity<Build> updateBuild(@RequestBody BuildDTO buildDTO) {
-        return ResponseEntity.ok(buildService.updateBuild(buildDTO));
+    public ResponseEntity<Build> updateBuild(@RequestBody Build build, Part partToAdd) {
+        build.setPartToAdd(partToAdd);
+        Build updatedBuild = buildService.updateBuild(build);
+        if (updatedBuild.getId() == null) {
+            return ResponseEntity.noContent().build();
+        }
+            return ResponseEntity.ok(updatedBuild);
     }
 
     @DeleteMapping("/{id}")

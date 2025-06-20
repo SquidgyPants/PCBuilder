@@ -26,7 +26,7 @@ const fetchBuild = async () => {
 
 const saveBuildAsync = async () => {
   try {
-    await client.updateBuild(result.value)
+    await client.updateBuild(result.value, result.value.partToAdd)
   } catch (err) {
     error.value = err
     console.error('Error saving answers:', err)
@@ -48,7 +48,7 @@ onMounted(() => {fetchBuild()})
         {{ item.name }} - {{ item.typeName }}
       </option>
     </select>
-    <b-button @click="saveBuildAsync">Opslaan</b-button>
+    <b-button viewmodel="result.partToAdd" @click="saveBuildAsync">Opslaan</b-button>
   </div>
 </template>
 

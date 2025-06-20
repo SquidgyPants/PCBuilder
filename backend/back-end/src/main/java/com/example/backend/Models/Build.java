@@ -1,5 +1,6 @@
 package com.example.backend.Models;
 
+import com.example.backend.DTOs.BuildPartDTO;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -14,7 +15,10 @@ public class Build {
     private Double price;
     private String creator;
 
+    private List<BuildPart> buildParts;
+
     private List<Part> parts;
+    private Part partToAdd;
 
     private List<Part> allParts;
 }

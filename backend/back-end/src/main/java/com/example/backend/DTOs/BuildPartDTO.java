@@ -9,14 +9,14 @@ import lombok.Setter;
 @Table(name = "build_part")
 @Getter
 @Setter
-public class BuildPart {
+public class BuildPartDTO {
     @Id
     private String id;
     @ManyToOne
     @JoinColumn(name = "build_id")
-    private BuildDTO build;
+    private BuildDTO buildDTO;
 
     @ManyToOne
     @JoinColumn(name = "part_id")
-    private PartDTO part;
+    private PartDTO partDTO;
 }
