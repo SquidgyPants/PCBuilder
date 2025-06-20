@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -31,6 +32,12 @@ public class BuildController {
         return ResponseEntity.ok(buildService.getBuild(id));
     }
 
+    @GetMapping("/getAllBuilds")
+    public ResponseEntity<List<Build>> getAllBuilds() {
+        List<Build> builds = buildService.getAllBuilds();
+        return ResponseEntity.ok(builds);
+    }
+
     @GetMapping("/getNewBuild")
     public ResponseEntity<Build> getNewBuild() {
         Build build = buildService.getNewBuild();
@@ -38,8 +45,7 @@ public class BuildController {
     }
 
     @PutMapping("/updateBuild")
-    public ResponseEntity<Build> updateBuild(@RequestBody Build build, Part partToAdd) {
-        build.setPartToAdd(partToAdd);
+    public ResponseEntity<Build> updateBuild(@RequestBody Build build) {
         Build updatedBuild = buildService.updateBuild(build);
         if (updatedBuild.getId() == null) {
             return ResponseEntity.noContent().build();

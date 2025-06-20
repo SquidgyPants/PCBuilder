@@ -45,10 +45,16 @@ public class BuildContainer {
     public Build getBuild(UUID id) {
         BuildDTO builddto = repo.findById(id.toString())
                 .orElse(new BuildDTO());
-        List<Part> parts = PartMapper.toEntityList(buildPart.findPartsByBuildId(id.toString()));
+//        List<Part> parts = PartMapper.toEntityList(buildPart.findPartsByBuildId(id.toString()));
         Build build = BuildMapper.toEntity(builddto);
-        build.setParts(parts);
+//        build.setParts(parts);
         return build;
+    }
+
+    public List<Build> getAllBuilds() {
+        return StreamSupport.stream(repo.findAll().spliterator(), false)
+                .map(BuildMapper::toEntity)
+                .toList();
     }
 
     public Build getNewBuild() {
@@ -76,37 +82,24 @@ public class BuildContainer {
     }
 
     public Build updateBuild(Build build) {
+        build.setParts(PartMapper.toEntityList(buildPart.findPartsByBuildId(build.getId().toString())));
         BuildDTO buildDTO = BuildMapper.toDTO(build);
 
-        for (BuildPart bp : build.getBuildParts()) {
-            if (bp.getBuildId() != null) {
-                BuildPartDTO buildPartDTO = BuildPartMapper.toDto(bp);
-                buildPartDTO.setId(UUID.randomUUID().toString());
-                buildPartDTO.setBuildDTO(buildDTO);
-                buildPartDTO.setPartDTO(PartMapper.toDTO(build.getPartToAdd()));
-                buildPart.save(buildPartDTO);
-            } else {
-                throw new IllegalArgumentException("BuildPart must have a valid buildId");
-            }
-        }
-        for (Part part : build.getAllParts()) {
-            if (part.getType() == build.getPartToAdd().getType()) {
-                build.getAllParts().remove(part);
-            }
-        }
+        BuildPartDTO buildPartDTO = new BuildPartDTO();
+        buildPartDTO.setId(UUID.randomUUID().toString());
+        buildPartDTO.setBuildDto(buildDTO);
+        buildPartDTO.setPartDto(PartMapper.toDTO(build.getPartToAdd()));
+        buildPart.save(buildPartDTO);
 
-        return BuildMapper.toEntity(repo.save(buildDTO));
-//        if (build.getId() == null || build.getId().isEmpty()) {
-//            throw new IllegalArgumentException("Build cannot be null or empty");
-//        }
-//        build.getParts().add(build.getPartToAdd());
-//        for (Part part : build.getParts()) {
-//            if (part.getId() == null || part.getId().isEmpty()) {
-//                throw new IllegalArgumentException("Part cannot be null or empty");
-//            }
-//        }
-//        buildPart.addPartsToBuild(build.getId().toString(), build.getPartToAdd().getId().toString());
-//        return BuildMapper.toEntity(repo.save(build));
+
+        build.getAllParts().removeIf(
+                part -> part.getType() == build.getPartToAdd().
+
+                        getType()
+        );
+
+        repo.save(buildDTO);
+        return build;
     }
 
     public void deleteBuild(UUID id) {

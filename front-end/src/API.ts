@@ -21,12 +21,8 @@ export class Client {
     /**
      * @return OK
      */
-    updateBuild(partToAdd: Part, body: Build): Promise<Build> {
-        let url_ = this.baseUrl + "/build/updateBuild?";
-        if (partToAdd === undefined || partToAdd === null)
-            throw new Error("The parameter 'partToAdd' must be defined and cannot be null.");
-        else
-            url_ += "partToAdd=" + encodeURIComponent("" + partToAdd) + "&";
+    updateBuild(body: Build): Promise<Build> {
+        let url_ = this.baseUrl + "/build/updateBuild";
         url_ = url_.replace(/[?&]$/, "");
 
         const content_ = JSON.stringify(body);
@@ -378,6 +374,50 @@ export class Client {
             });
         }
         return Promise.resolve<Build>(null as any);
+    }
+
+    /**
+     * @return OK
+     */
+    getAllBuilds(): Promise<Build[]> {
+        let url_ = this.baseUrl + "/build/getAllBuilds";
+        url_ = url_.replace(/[?&]$/, "");
+
+        let options_: RequestInit = {
+            method: "GET",
+            headers: {
+                "Accept": "*/*"
+            }
+        };
+
+        return this.http.fetch(url_, options_).then((_response: Response) => {
+            return this.processGetAllBuilds(_response);
+        });
+    }
+
+    protected processGetAllBuilds(response: Response): Promise<Build[]> {
+        const status = response.status;
+        let _headers: any = {}; if (response.headers && response.headers.forEach) { response.headers.forEach((v: any, k: any) => _headers[k] = v); };
+        if (status === 200) {
+            return response.text().then((_responseText) => {
+            let result200: any = null;
+            let resultData200 = _responseText === "" ? null : JSON.parse(_responseText, this.jsonParseReviver);
+            if (Array.isArray(resultData200)) {
+                result200 = [] as any;
+                for (let item of resultData200)
+                    result200!.push(Build.fromJS(item));
+            }
+            else {
+                result200 = <any>null;
+            }
+            return result200;
+            });
+        } else if (status !== 200 && status !== 204) {
+            return response.text().then((_responseText) => {
+            return throwException("An unexpected server error occurred.", status, _responseText, _headers);
+            });
+        }
+        return Promise.resolve<Build[]>(null as any);
     }
 
     /**

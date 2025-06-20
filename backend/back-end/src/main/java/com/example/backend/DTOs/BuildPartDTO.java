@@ -14,9 +14,9 @@ public class BuildPartDTO {
     private String id;
     @ManyToOne
     @JoinColumn(name = "build_id")
-    private BuildDTO buildDTO;
+    private BuildDTO buildDto;
 
     @ManyToOne
     @JoinColumn(name = "part_id")
-    private PartDTO partDTO;
+    private PartDTO partDto;
 }

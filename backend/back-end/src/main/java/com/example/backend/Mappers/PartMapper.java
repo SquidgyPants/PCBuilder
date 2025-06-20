@@ -25,7 +25,7 @@ public class PartMapper {
     }
 
     public static Part toEntity(PartDTO dto) {
-        if (dto == null) return null;
+        if (dto == null) return new Part();
 
         Part part = new Part();
         part.setId(UUID.fromString(dto.getId()));
@@ -37,7 +37,7 @@ public class PartMapper {
         return part;
     }
 
-    public static List<PartDTO> toDTOList(Iterable<Part> parts) {
+    public static List<PartDTO> toDTOList(List<Part> parts) {
         List<PartDTO> result = new ArrayList<>();
         for (Part part : parts) {
             result.add(toDTO(part));
@@ -45,7 +45,7 @@ public class PartMapper {
         return result;
     }
 
-    public static List<Part> toEntityList(Iterable<PartDTO> dtos) {
+    public static List<Part> toEntityList(List<PartDTO> dtos) {
         List<Part> result = new ArrayList<>();
         for (PartDTO dto : dtos) {
             result.add(toEntity(dto));

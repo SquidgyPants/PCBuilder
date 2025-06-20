@@ -20,6 +20,11 @@ const links = [
         component: BuildComponent,
     },
     {
+        path:"/selectedbuild/:buildId",
+        name:"SelectedBuild",
+        component: SelectedBuildComponent,
+    },
+    {
         path:"/mybuilds",
         name:"MyBuilds",
         component:BuildPartComponent

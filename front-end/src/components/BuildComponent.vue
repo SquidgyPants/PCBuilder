@@ -7,6 +7,7 @@ const client = new Client()
 const result = ref()
 const isLoading = ref(false)
 const error = ref()
+const selectedPart = ref()
 
 const fetchBuild = async () => {
   isLoading.value = true
@@ -26,7 +27,8 @@ const fetchBuild = async () => {
 
 const saveBuildAsync = async () => {
   try {
-    await client.updateBuild(result.value, result.value.partToAdd)
+    result.value.partToAdd = selectedPart.value
+    await client.updateBuild(result.value)
   } catch (err) {
     error.value = err
     console.error('Error saving answers:', err)
@@ -42,13 +44,23 @@ onMounted(() => {fetchBuild()})
 <template>
   <div v-if="isLoading">Loading parts...</div>
   <div v-else-if="error">Error: {{ error.message }}</div>
-  <div v-else class="container">
-    <select class="form-select">
-      <option v-for="item in result?.allParts" :key="item.id">
+  <div v-else-if="result" class="container">
+    <div class="mb-3">
+      <label for="buildName" class="form-label">Naam van build</label>
+      <input
+          type="text"
+          class="form-control"
+          id="buildName"
+          v-model="result.name"
+          placeholder="Voer naam in"
+      />
+    </div>
+    <select class="form-select" v-model="selectedPart">
+      <option v-for="item in result?.allParts" :key="item.id" :value="item">
         {{ item.name }} - {{ item.typeName }}
       </option>
     </select>
-    <b-button viewmodel="result.partToAdd" @click="saveBuildAsync">Opslaan</b-button>
+    <button @click="saveBuildAsync">Opslaan</button>
   </div>
 </template>
 
