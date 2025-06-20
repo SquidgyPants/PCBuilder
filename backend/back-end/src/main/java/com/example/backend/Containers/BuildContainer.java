@@ -1,13 +1,16 @@
 package com.example.backend.Containers;
 
 import com.example.backend.DTOs.BuildDTO;
+import com.example.backend.DTOs.BuildPartDTO;
 import com.example.backend.DTOs.PartDTO;
 import com.example.backend.Mappers.BuildMapper;
+import com.example.backend.Mappers.BuildPartMapper;
 import com.example.backend.Mappers.PartMapper;
 import com.example.backend.Models.Build;
+import com.example.backend.Models.BuildPart;
 import com.example.backend.Models.Part;
 import com.example.backend.Repositories.BuildInterface;
-import com.example.backend.Repositories.BuildPart;
+import com.example.backend.Repositories.BuildPartInterface;
 import com.example.backend.Repositories.PartInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,11 +28,11 @@ import static java.util.stream.Collectors.toList;
 public class BuildContainer {
 
     private final BuildInterface repo;
-    private final BuildPart buildPart;
+    private final BuildPartInterface buildPart;
     private final PartInterface partRepo;
 
     @Autowired
-    public BuildContainer(BuildInterface repo, BuildPart buildPart, PartInterface partRepo) {
+    public BuildContainer(BuildInterface repo, BuildPartInterface buildPart, PartInterface partRepo) {
         this.repo = repo;
         this.buildPart = buildPart;
         this.partRepo = partRepo;
@@ -39,13 +42,20 @@ public class BuildContainer {
         return BuildMapper.toEntity(repo.save(dto));
     }
 
-    public Build getBuild(UUID id) {
-        BuildDTO builddto = repo.findById(id.toString())
+    public Build getBuild(String buildId) {
+        BuildDTO builddto = repo.findById(buildId)
                 .orElse(new BuildDTO());
-        List<Part> parts = PartMapper.toEntityList(buildPart.findPartsByBuildId(id.toString()));
+        List<Part> parts = PartMapper.toEntityList(buildPart.findPartsByBuildId(buildId));
         Build build = BuildMapper.toEntity(builddto);
         build.setParts(parts);
+        getBuildPrice(build);
         return build;
+    }
+
+    public List<Build> getAllBuilds() {
+        return StreamSupport.stream(repo.findAll().spliterator(), false)
+                .map(BuildMapper::toEntity)
+                .toList();
     }
 
     public Build getNewBuild() {
@@ -70,22 +80,38 @@ public class BuildContainer {
 
         buildModel.setAllParts(parts);
         return buildModel;
-}
-
-    public Build addPartsToBuild (List<Part> parts, String buildId) {
-        Build build = BuildMapper.toEntity(repo.findById(buildId).orElse(new BuildDTO()));
-        for  (Part p : parts) {
-            build.getParts().add(p);
-        }
-        return build;
     }
 
-    public Build updateBuild(BuildDTO dto) {
-        return BuildMapper.toEntity(repo.save(dto));
+    public Build updateBuild(Build build) {
+        build.setParts(PartMapper.toEntityList(buildPart.findPartsByBuildId(build.getId().toString())));
+        BuildDTO buildDTO = BuildMapper.toDTO(build);
+
+        BuildPartDTO buildPartDTO = new BuildPartDTO();
+        buildPartDTO.setId(UUID.randomUUID().toString());
+        buildPartDTO.setBuildDto(buildDTO);
+        buildPartDTO.setPartDto(PartMapper.toDTO(build.getPartToAdd()));
+        buildPart.save(buildPartDTO);
+
+
+        build.getAllParts().removeIf(
+                part -> part.getType() == build.getPartToAdd().
+
+                        getType()
+        );
+
+        repo.save(buildDTO);
+        return build;
     }
 
     public void deleteBuild(UUID id) {
         repo.deleteById(id.toString());
+    }
+
+    public void getBuildPrice(Build build) {
+        build.setPrice(0.0);
+        for (Part part : build.getParts()) {
+            build.setPrice(build.getPrice() + part.getPrice());
+        }
     }
 }
 

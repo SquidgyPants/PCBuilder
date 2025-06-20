@@ -2,6 +2,7 @@ import {createRouter, createWebHistory} from "vue-router";
 import HelloWorld from "./components/HelloWorld.vue";
 import BuildComponent from "./components/BuildComponent.vue";
 import BuildPartComponent from "./components/BuildPartComponent.vue";
+import SelectedBuildComponent from "./components/SelectedBuildComponent.vue";
 
 const links = [
     {
@@ -18,6 +19,11 @@ const links = [
         path:"/builder/:buildId",
         name:"Build",
         component: BuildComponent,
+    },
+    {
+        path:"/selectedbuild/:buildId",
+        name:"SelectedBuild",
+        component: SelectedBuildComponent,
     },
     {
         path:"/mybuilds",

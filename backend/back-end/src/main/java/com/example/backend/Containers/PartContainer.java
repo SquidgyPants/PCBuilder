@@ -1,11 +1,13 @@
 package com.example.backend.Containers;
 
+import com.example.backend.DTOs.PartDTO;
 import com.example.backend.Mappers.PartMapper;
 import com.example.backend.Models.Part;
 import com.example.backend.Repositories.PartInterface;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -17,8 +19,8 @@ public class PartContainer {
         this.repo = repo;
     }
 
-    public Iterable<Part> getAllParts() {
-        return PartMapper.toEntityList(repo.findAll());
+    public List<Part> getAllParts() {
+        return PartMapper.toEntityList((List<PartDTO>) repo.findAll());
     }
 
     public Part getPartById(UUID id) {

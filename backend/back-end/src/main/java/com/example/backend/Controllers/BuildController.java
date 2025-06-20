@@ -3,10 +3,12 @@ package com.example.backend.Controllers;
 import com.example.backend.Containers.BuildContainer;
 import com.example.backend.DTOs.BuildDTO;
 import com.example.backend.Models.Build;
+import com.example.backend.Models.Part;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -26,8 +28,18 @@ public class BuildController {
     }
 
     @GetMapping("/getBuild")
-    public ResponseEntity<Build> getBuild(@PathVariable UUID id) {
-        return ResponseEntity.ok(buildService.getBuild(id));
+    public ResponseEntity<Build> getBuild(@RequestParam String id) {
+        Build build = buildService.getBuild(id);
+        if (build == null || build.getId() == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(build);
+    }
+
+    @GetMapping("/getAllBuilds")
+    public ResponseEntity<List<Build>> getAllBuilds() {
+        List<Build> builds = buildService.getAllBuilds();
+        return ResponseEntity.ok(builds);
     }
 
     @GetMapping("/getNewBuild")
@@ -37,8 +49,12 @@ public class BuildController {
     }
 
     @PutMapping("/updateBuild")
-    public ResponseEntity<Build> updateBuild(@RequestBody BuildDTO buildDTO) {
-        return ResponseEntity.ok(buildService.updateBuild(buildDTO));
+    public ResponseEntity<Build> updateBuild(@RequestBody Build build) {
+        Build updatedBuild = buildService.updateBuild(build);
+        if (updatedBuild.getId() == null) {
+            return ResponseEntity.noContent().build();
+        }
+            return ResponseEntity.ok(updatedBuild);
     }
 
     @DeleteMapping("/{id}")
