@@ -28,8 +28,12 @@ public class BuildController {
     }
 
     @GetMapping("/getBuild")
-    public ResponseEntity<Build> getBuild(@PathVariable UUID id) {
-        return ResponseEntity.ok(buildService.getBuild(id));
+    public ResponseEntity<Build> getBuild(@RequestParam String id) {
+        Build build = buildService.getBuild(id);
+        if (build == null || build.getId() == null) {
+            return ResponseEntity.noContent().build();
+        }
+        return ResponseEntity.ok(build);
     }
 
     @GetMapping("/getAllBuilds")

@@ -42,12 +42,13 @@ public class BuildContainer {
         return BuildMapper.toEntity(repo.save(dto));
     }
 
-    public Build getBuild(UUID id) {
-        BuildDTO builddto = repo.findById(id.toString())
+    public Build getBuild(String buildId) {
+        BuildDTO builddto = repo.findById(buildId)
                 .orElse(new BuildDTO());
-//        List<Part> parts = PartMapper.toEntityList(buildPart.findPartsByBuildId(id.toString()));
+        List<Part> parts = PartMapper.toEntityList(buildPart.findPartsByBuildId(buildId));
         Build build = BuildMapper.toEntity(builddto);
-//        build.setParts(parts);
+        build.setParts(parts);
+        getBuildPrice(build);
         return build;
     }
 
@@ -104,6 +105,13 @@ public class BuildContainer {
 
     public void deleteBuild(UUID id) {
         repo.deleteById(id.toString());
+    }
+
+    public void getBuildPrice(Build build) {
+        build.setPrice(0.0);
+        for (Part part : build.getParts()) {
+            build.setPrice(build.getPrice() + part.getPrice());
+        }
     }
 }
 

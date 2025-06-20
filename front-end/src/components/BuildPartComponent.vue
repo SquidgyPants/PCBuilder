@@ -41,7 +41,7 @@ onMounted(() => {fetchBuilds()})
         <b-card class="mb-2 rounded-pill" id="b-card" style="padding: 0;">
           <div id="inline-flex-div" style="padding: 0;">
             <p style="margin-bottom: 0; font-size: x-large">{{ item?.name }}</p>
-            <b-button class="rounded-pill" @click="$router.push(``)">Bekijk build</b-button>
+            <b-button class="rounded-pill" @click="$router.push(`/SelectedBuild/${item?.id}`)">Bekijk build</b-button>
           </div>
         </b-card>
       </li>

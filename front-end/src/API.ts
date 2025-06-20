@@ -342,8 +342,12 @@ export class Client {
     /**
      * @return OK
      */
-    getBuild(): Promise<Build> {
-        let url_ = this.baseUrl + "/build/getBuild";
+    getBuild(id: string): Promise<Build> {
+        let url_ = this.baseUrl + "/build/getBuild?";
+        if (id === undefined || id === null)
+            throw new Error("The parameter 'id' must be defined and cannot be null.");
+        else
+            url_ += "id=" + encodeURIComponent("" + id) + "&";
         url_ = url_.replace(/[?&]$/, "");
 
         let options_: RequestInit = {
